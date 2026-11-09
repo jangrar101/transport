@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f8">
+  <title>HaulHub — Transport operations</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 7.5h11v9H3zM14 10h4l3 3v3h-7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7" cy="18" r="2" fill="currentColor"/><circle cx="18" cy="18" r="2" fill="currentColor"/></svg>
+        </div>
+        <div class="brand-name">haul<span>hub</span></div>
+      </div>
+      <div class="workspace-label">Workspace</div>
+      <nav class="nav" id="navigation" aria-label="Main navigation"></nav>
+      <div class="sidebar-bottom">
+        <div class="support-card">
+          <strong>Need a hand?</strong>
+          <p>Our operations team is here to help you keep things moving.</p>
+          <button type="button" id="supportButton">Contact support →</button>
+        </div>
+        <div class="user-row">
+          <div class="avatar">AM</div>
+          <div class="user-info"><strong>Arjun Mehta</strong><span>Fleet administrator</span></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="crumb-wrap">
+          <button type="button" class="mobile-menu" id="menuButton" aria-label="Open navigation">☰</button>
+          <div class="crumb">Workspace <span aria-hidden="true"> / </span> <strong id="breadcrumb">Overview</strong></div>
+        </div>
+        <div class="top-actions">
+          <div class="search-wrap"><span aria-hidden="true">⌕</span><input class="search" id="searchInput" type="search" placeholder="Search trucks, drivers..." aria-label="Search trucks and drivers"></div>
+          <select class="portal-select" id="portalSelect" aria-label="Choose portal">
+            <option value="admin">Admin portal</option>
+            <option value="driver">Driver portal</option>
+            <option value="company">Company portal</option>
+          </select>
+          <button type="button" class="icon-button" id="notificationButton" aria-label="Notifications">♧</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="section-view active" id="view-overview">
+          <div class="page-heading">
+            <div><div class="eyebrow" id="welcomeLabel">MONDAY, 9 NOVEMBER</div><h1 id="pageTitle">Good morning, Arjun</h1><p class="subtitle" id="pageSubtitle">Here’s what’s happening across your transport operations today.</p></div>
+            <button type="button" class="button-primary" id="newBookingButton"><span aria-hidden="true">＋</span> New booking</button>
+          </div>
+          <div class="stats">
+            <article class="stat-card"><div class="stat-top"><span>Total fleet</span><span class="stat-symbol">▣</span></div><div class="stat-value" id="fleetCount">—</div><div class="stat-foot">From your registered trucks</div></article>
+            <article class="stat-card"><div class="stat-top"><span>Available trucks</span><span class="stat-symbol">⌖</span></div><div class="stat-value" id="availableCount">—</div><div class="stat-foot"><span class="up">Ready to be booked</span></div></article>
+            <article class="stat-card"><div class="stat-top"><span>Active bookings</span><span class="stat-symbol">↗</span></div><div class="stat-value" id="bookingCount">—</div><div class="stat-foot">From saved booking records</div></article>
+            <article class="stat-card"><div class="stat-top"><span>On-time delivery</span><span class="stat-symbol">◷</span></div><div class="stat-value">—</div><div class="stat-foot">No delivery data yet</div></article>
+          </div>
+          <div class="overview-grid">
+            <section class="panel map-panel">
+              <div class="panel-heading"><div><h2>Fleet location preview</h2><p>Illustrative only · GPS tracking is not connected</p></div><button type="button" class="text-link" data-view="locations">View full map →</button></div>
+              <div class="map-frame" role="img" aria-label="Illustrative map preview showing example truck locations around Delhi">
+                <div class="road one"></div><div class="road two"></div><div class="road three"></div>
+                <span class="place-label place-a">Delhi</span><span class="place-label place-b">Agra</span><span class="place-label place-c">Gurugram</span><span class="place-label place-d">Jaipur</span>
+                <div class="map-marker marker-a"><span>08</span></div><div class="map-marker marker-b"><span>14</span></div><div class="map-marker marker-c"><span>21</span></div>
+                <div class="map-legend"><span><i class="legend-dot"></i> Available</span><span><i class="legend-dot busy"></i> On trip</span></div>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-heading"><div><h2>Recent activity</h2><p>Latest updates from your fleet</p></div><button type="button" class="text-link" data-view="bookings">See all →</button></div>
+              <div class="activity-list" id="activityList"><div class="empty-note">Loading saved bookings…</div></div>
+            </section>
+          </div>
+          <section class="panel table-panel">
+            <div class="panel-heading"><div><h2>Fleet at a glance</h2><p>Truck details, driver assignment and current status</p></div><div class="table-tools"><select class="filter-select" id="statusFilter" aria-label="Filter trucks by status"><option value="all">All trucks</option><option value="available">Available</option><option value="on-trip">On trip</option><option value="maintenance">Maintenance</option></select><button type="button" class="text-link" data-view="fleet">View fleet →</button></div></div>
+            <div class="table-scroll"><table><thead><tr><th>Truck no.</th><th>Plate no.</th><th>Driver</th><th>Location</th><th>Capacity</th><th>Status</th></tr></thead><tbody id="truckRows"></tbody></table></div>
+          </section>
+        </section>
+
+        <section class="section-view" id="view-fleet">
+          <div class="page-heading"><div><div class="eyebrow">TRANSPORT ASSETS</div><h1>Fleet & available trucks</h1><p class="subtitle">Manage truck details, assignments and availability.</p></div><button type="button" class="button-primary" id="addTruckButton">＋ Add truck</button></div>
+          <section class="panel table-panel"><div class="panel-heading"><div><h2>All trucks</h2><p>Registration, driver and current location</p></div><div class="table-tools"><select class="filter-select" id="fleetStatusFilter" aria-label="Filter fleet by status"><option value="all">All trucks</option><option value="available">Available</option><option value="on-trip">On trip</option><option value="maintenance">Maintenance</option></select></div></div><div class="table-scroll"><table><thead><tr><th>Truck no.</th><th>Plate no.</th><th>Driver</th><th>Location</th><th>Capacity</th><th>Status</th></tr></thead><tbody id="fleetRows"></tbody></table></div></section>
+        </section>
+
+        <section class="section-view" id="view-bookings">
+          <div class="page-heading"><div><div class="eyebrow">ORDERS & LOADS</div><h1>Bookings</h1><p class="subtitle">Track transport requests, loads and delivery progress.</p></div><button type="button" class="button-primary" id="bookingButton">＋ New booking</button></div>
+          <section class="panel table-panel"><div class="panel-heading"><div><h2>Recent bookings</h2><p>Bookings from your company partners</p></div><span class="status on-trip">26 active</span></div><div class="table-scroll"><table><thead><tr><th>Booking ID</th><th>Company</th><th>Route</th><th>Load</th><th>Truck / driver</th><th>Status</th></tr></thead><tbody id="bookingRows"></tbody></table></div></section>
+        </section>
+
+        <section class="section-view" id="view-drivers">
+          <div class="page-heading"><div><div class="eyebrow">PEOPLE & ASSIGNMENTS</div><h1>Drivers</h1><p class="subtitle">Driver profiles, contact details and assigned vehicles.</p></div><button type="button" class="button-primary" id="inviteDriverButton">＋ Add driver</button></div>
+          <section class="panel"><div class="panel-heading"><div><h2>Driver directory</h2><p>Driver availability and truck assignment</p></div></div><div class="driver-grid" id="driverCards"></div></section>
+        </section>
+
+        <section class="section-view" id="view-companies">
+          <div class="page-heading"><div><div class="eyebrow">BUSINESS PARTNERS</div><h1>Companies</h1><p class="subtitle">Manage client companies and their transport bookings.</p></div><button type="button" class="button-primary" id="addCompanyButton">＋ Add company</button></div>
+          <section class="panel"><div class="panel-heading"><div><h2>Company directory</h2><p>Partner accounts and recent activity</p></div></div><div class="company-grid" id="companyCards"></div></section>
+        </section>
+
+        <section class="section-view" id="view-locations">
+          <div class="page-heading"><div><div class="eyebrow">LIVE TRACKING</div><h1>Truck locations</h1><p class="subtitle">See where your fleet is and which trucks are ready for a booking.</p></div><button type="button" class="button-secondary" id="refreshButton">↻ Refresh locations</button></div>
+          <div class="overview-grid"><section class="panel map-panel"><div class="panel-heading"><div><h2>Fleet location preview</h2><p>Illustrative only · GPS tracking is not connected</p></div></div><div class="map-frame" style="height:410px" role="img" aria-label="Illustrative map preview showing example truck locations"><div class="road one"></div><div class="road two"></div><div class="road three"></div><span class="place-label place-a">Delhi</span><span class="place-label place-b">Agra</span><span class="place-label place-c">Gurugram</span><span class="place-label place-d">Jaipur</span><div class="map-marker marker-a"><span>08</span></div><div class="map-marker marker-b"><span>14</span></div><div class="map-marker marker-c"><span>21</span></div><div class="map-legend"><span><i class="legend-dot"></i> Available</span><span><i class="legend-dot busy"></i> On trip</span></div></div></section><section class="panel table-panel"><div class="panel-heading"><div><h2>Available nearby</h2><p>Ready to take a load</p></div></div><div class="table-scroll"><table><thead><tr><th>Truck</th><th>Location</th><th>Status</th></tr></thead><tbody id="nearbyRows"></tbody></table></div></section></div>
+        </section>
+
+        <section class="section-view" id="view-profile">
+          <div class="page-heading"><div><div class="eyebrow">ACCOUNT DETAILS</div><h1 id="profileHeading">My profile</h1><p class="subtitle">View your portal profile and transport details.</p></div></div>
+          <div class="profile-layout"><section class="panel profile-card"><div class="avatar" id="profileAvatar">AM</div><h2 id="profileName">Arjun Mehta</h2><p id="profileRole">Fleet administrator</p><span class="status available">Active</span></section><section class="panel"><div class="panel-heading"><div><h2>Profile information</h2><p>Contact and vehicle information</p></div></div><div class="detail-grid" id="profileDetails"></div></section></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <form class="modal" id="bookingForm">
+      <div class="modal-head"><div><h2 id="modalTitle">Create a booking</h2><p>Add a load request for your transport team.</p></div><button class="close-button" type="button" id="closeModal" aria-label="Close dialog">×</button></div>
+      <div class="form-grid">
+        <div class="form-field full"><label for="companyInput">Company</label><select id="companyInput" required><option value="">Select a company</option><option>Sharma Foods</option><option>Metro Wholesale</option><option>Northstar Retail</option><option>Greenfield Agri</option></select></div>
+        <div class="form-field"><label for="pickupInput">Pickup city</label><input id="pickupInput" placeholder="e.g. Delhi" required></div>
+        <div class="form-field"><label for="dropInput">Drop city</label><input id="dropInput" placeholder="e.g. Jaipur" required></div>
+        <div class="form-field"><label for="loadInput">Load type</label><input id="loadInput" placeholder="e.g. Packaged goods" required></div>
+        <div class="form-field"><label for="weightInput">Weight (tonnes)</label><input id="weightInput" type="number" min="0.1" step="0.1" placeholder="e.g. 8" required></div>
+      </div>
+      <div class="modal-actions"><button type="button" class="button-secondary" id="cancelModal">Cancel</button><button type="submit" class="button-primary">Create booking</button></div>
+    </form>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js" defer></script>
+</body>
+</html>
